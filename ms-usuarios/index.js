@@ -9,8 +9,7 @@ const { getFirestore } = require('firebase-admin/firestore');
 // --- Configuración de Firebase ---
 // En LOCAL usa serviceAccount.json. En Railway (producción) se reemplaza
 // por variables de entorno (ver guía "ShopNow en Railway", Fase 2, Paso 4).
-const serviceAccount = require('./serviceAccount.json');
-initializeApp({ credential: cert(serviceAccount) });
+initializeApp({ credential: cert({ projectId: process.env.FIREBASE_PROJECT_ID, clientEmail: process.env.FIREBASE_CLIENT_EMAIL, privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'), }) });
 
 const db = getFirestore();
 const app = express();
